@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>PrestaSharp</id>
+    <version>1.1.0.2-INTERNAL</version>
+    <title>Bukimedia PrestaSharp</title>
+    <authors>Bukimedia</authors>
+    <owners>Bukimedia</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://www.gnu.org/licenses/gpl-3.0.en.html</licenseUrl>
+    <projectUrl>http://bukimedia.github.io/PrestaSharp/</projectUrl>
+    <iconUrl>https://avatars0.githubusercontent.com/u/5653635?s=200&amp;amp;v=4</iconUrl>
+    <description>CSharp .Net client library for the PrestaShop API via web service</description>
+    <releaseNotes>* Added Task/Async features.</releaseNotes>
+    <copyright>Copyright (C) 2019 Bukimedia</copyright>
+    <tags>prestashop rest webservice official prestasharp bukimedia</tags>
+    <repository type="Dependency" url="https://github.com/Bukimedia/PrestaSharp" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5.2">
+        <dependency id="RestSharp" version="106.6.10" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="RestSharp" version="106.6.10" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\PrestaSharp\bin\Release\net452\Bukimedia.PrestaSharp.dll" target="lib\net452\Bukimedia.PrestaSharp.dll" />
+    <file src="..\PrestaSharp\bin\Release\netstandard2.0\Bukimedia.PrestaSharp.dll" target="lib\netstandard2.0\Bukimedia.PrestaSharp.dll" />
+  </files>
+</package>
