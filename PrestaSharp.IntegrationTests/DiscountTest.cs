@@ -26,9 +26,9 @@ namespace PrestaSharp.IntegrationTests
 
             discount.name = new List<language> { new Bukimedia.PrestaSharp.Entities.AuxEntities.language(1, "DiscountName") };
             discount.code = "DISCCODE";
-            discount.id_cart_rule = 1;
+            discount.id = 1;
             discount.free_shipping = 0;
-            discount.value_tax_excl = 0;
+            discount.reduction_tax = 0;
             discount.reduction_percent = (decimal?)10;
 
             discount.date_from = DateTime.Now.ToString("yyyy-MM-dd HH:MM:ss");
