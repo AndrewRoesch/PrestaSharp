@@ -20,7 +20,7 @@
     <PackageId>PrestaSharp</PackageId>
     <Version>1.2.9.0-INTERNAL</Version>
     <Title>Bukimedia PrestaSharp</Title>
-    <PackageVersion>1.2.9</PackageVersion>
+    <PackageVersion>1.2.9-INTERNAL</PackageVersion>
     <RepositoryUrl>https://github.com/Bukimedia/PrestaSharp</RepositoryUrl>
     <Description>CSharp .Net client library for the PrestaShop API via web service</Description>
   </PropertyGroup>
