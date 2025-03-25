@@ -17,20 +17,21 @@ namespace Bukimedia.PrestaSharp.Factories
         public OrderHistoryFactory(string BaseUrl, string Account, string SecretKey)
             : base(BaseUrl, Account, SecretKey)
         {
-
-            public new order_history Add(order_history Entity)
-            {
-                long? idAux = Entity.id;
-                Entity.id = null;
-                List<PrestaSharp.Entities.PrestaShopEntity> Entities = new
-                List<PrestaSharp.Entities.PrestaShopEntity>();
-                Entities.Add(Entity);
-                RestRequest request = this.RequestForAdd($"{pluralEntityName}&sendemail=1", Entities);
-                request.AddParameter("sendemail", 1);
-                order_history aux = this.Execute<order_history>(request);
-                Entity.id = idAux;
-                return this.Get((long)aux.id);
-            }
+           
         }
-    }
+
+        public new order_history Add(order_history Entity)
+        {
+            long? idAux = Entity.id;
+            Entity.id = null;
+            List<PrestaSharp.Entities.PrestaShopEntity> Entities = new
+            List<PrestaSharp.Entities.PrestaShopEntity>();
+            Entities.Add(Entity);
+            RestRequest request = this.RequestForAdd($"{pluralEntityName}&sendemail=1", Entities);
+            request.AddParameter("sendemail", 1);
+            order_history aux = this.Execute<order_history>(request);
+            Entity.id = idAux;
+            return this.Get((long)aux.id);
+        }
+    } 
 }
