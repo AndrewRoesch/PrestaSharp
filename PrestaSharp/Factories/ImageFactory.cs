@@ -77,6 +77,12 @@ namespace Bukimedia.PrestaSharp.Factories
             Execute<Entities.image>(request);
         }
 
+        protected bool CheckImage(string Resource, long? ResourceId, long? ImageId)
+        {
+            RestRequest request = RequestForHeadImage(Resource, ResourceId, ImageId);
+            return ExecuteHead(request);
+        }
+
         protected Task<List<Entities.image>> GetAllImagesAsync(string Resource)
         {
             RestRequest request = this.RequestForFilter("images/" + Resource, "full", null, null, null, "images");
@@ -126,6 +132,11 @@ namespace Bukimedia.PrestaSharp.Factories
             return ExecuteAsync<Entities.image>(request);
         }
 
+        protected Task<bool> CheckImageAsync(string Resource, long? ResourceId, long? ImageId)
+        {
+            RestRequest request = RequestForHeadImage(Resource, ResourceId, ImageId);
+            return ExecuteHeadAsync(request);
+        }
         #endregion Protected methods
 
         #region Manufacturer images
@@ -163,6 +174,16 @@ namespace Bukimedia.PrestaSharp.Factories
         public void DeleteManufacturerImage(long ManufacturerId)
         {
             DeleteImage("manufacturers", ManufacturerId, null);
+        }
+
+        /// <summary>
+        /// Checks if manufacturer have image and return true or false
+        /// </summary>
+        /// <param name="ManufacturerId"></param>
+        /// <returns></returns>
+        public bool CheckIfExistsManufacturerImage(long ManufacturerId)
+        {
+            return CheckImage("manufacturers", ManufacturerId, null);
         }
 
         public byte[] GetManufacturerImage(long ManufacturerId, long ImageId)
@@ -205,6 +226,16 @@ namespace Bukimedia.PrestaSharp.Factories
             return DeleteImageAsync("manufacturers", ManufacturerId, null);
         }
 
+        /// <summary>
+        /// Checks if manufacturer have image and return true or false
+        /// </summary>
+        /// <param name="ManufacturerId"></param>
+        /// <returns></returns>
+        public async Task<bool> CheckIfExistsManufacturerImageAsync(long ManufacturerId)
+        {
+            return await CheckImageAsync("manufacturers", ManufacturerId, null);
+        }
+
         public Task<byte[]> GetManufacturerImageAsync(long ManufacturerId, long ImageId)
         {
             RestRequest request = this.RequestForGet("images/manufacturers/" + ManufacturerId, ImageId, "");
@@ -212,6 +243,111 @@ namespace Bukimedia.PrestaSharp.Factories
         }
 
         #endregion Manufacturer images
+
+        #region Supplier images
+
+        public List<Entities.image> GetAllSupplierImages()
+        {
+            return GetAllImages("suppliers");
+        }
+
+        public List<Entities.imagetype> GetAllSupplierImageTypes()
+        {
+            return GetAllImageTypes("suppliers");
+        }
+
+        public void AddSupplierImage(long SupplierId, string SupplierImagePath)
+        {
+            AddImage("suppliers", SupplierId, SupplierImagePath);
+        }
+
+        public void AddSupplierImage(long SupplierId, byte[] SupplierImage)
+        {
+            AddImage("suppliers", SupplierId, SupplierImage);
+        }
+
+        public void UpdateSupplierImage(long SupplierId, string SupplierImagePath)
+        {
+            UpdateImage("suppliers", SupplierId, null, SupplierImagePath);
+        }
+
+        public void UpdateSupplierImage(long SupplierId, byte[] SupplierImage)
+        {
+            UpdateImage("suppliers", SupplierId, null, SupplierImage);
+        }
+
+        public void DeleteSupplierImage(long SupplierId)
+        {
+            DeleteImage("suppliers", SupplierId, null);
+        }
+
+        /// <summary>
+        /// Checks if supplier have image and return true or false
+        /// </summary>
+        /// <param name="SupplierId"></param>
+        /// <returns></returns>
+        public bool CheckIfExistsSupplierImage(long SupplierId)
+        {
+            return CheckImage("suppliers", SupplierId, null);
+        }
+
+        public byte[] GetSupplierImage(long SupplierId, long ImageId)
+        {
+            RestRequest request = RequestForGet("images/suppliers/" + SupplierId, ImageId, "");
+            return ExecuteForImage(request);
+        }
+
+        public Task<List<Entities.image>> GetAllSupplierImagesAsync()
+        {
+            return GetAllImagesAsync("suppliers");
+        }
+        public Task<List<Entities.imagetype>> GetAllSupplierImageTypesAsync()
+        {
+            return GetAllImageTypesAsync("suppliers");
+        }
+
+        public Task AddSupplierImageAsync(long SupplierId, string SupplierImagePath)
+        {
+            return AddImageAsync("suppliers", SupplierId, SupplierImagePath);
+        }
+
+        public Task AddSupplierImageAsync(long SupplierId, byte[] SupplierImage)
+        {
+            return AddImageAsync("suppliers", SupplierId, SupplierImage);
+        }
+
+        public Task UpdateSupplierImageAsync(long SupplierId, string SupplierImagePath)
+        {
+            return UpdateImageAsync("suppliers", SupplierId, null, SupplierImagePath);
+        }
+
+        public Task UpdateSupplierImageAsync(long SupplierId, byte[] SupplierImage)
+        {
+            return UpdateImageAsync("suppliers", SupplierId, null, SupplierImage);
+        }
+
+        public Task DeleteSupplierImageAsync(long SupplierId)
+        {
+            return DeleteImageAsync("suppliers", SupplierId, null);
+        }
+
+        /// <summary>
+        /// Checks if supplier have image and return true or false
+        /// </summary>
+        /// <param name="SupplierId"></param>
+        /// <returns></returns>
+        public async Task<bool> CheckIfExistsSupplierImageAsync(long SupplierId)
+        {
+            return await CheckImageAsync("suppliers", SupplierId, null);
+        }
+
+        public Task<byte[]> GetSupplierImageAsync(long SupplierId, long ImageId)
+        {
+            RestRequest request = this.RequestForGet("images/suppliers/" + SupplierId, ImageId, "");
+            return ExecuteForImageAsync(request);
+        }
+
+        #endregion Supplier images
 
         #region Product images
 
@@ -292,6 +428,19 @@ namespace Bukimedia.PrestaSharp.Factories
             DeleteImage("products", ProductId, ImageId);
         }
 
+        /// <summary>
+        /// If Image ID is null checks if product have any images
+        /// else checks if the specific product image exists
+        /// and return true or false
+        /// </summary>
+        /// <param name="ProductId"></param>
+        /// <param name="ImageId"></param>
+        /// <returns></returns>
+        public bool CheckIfExistsProductImage(long ProductId, long? ImageId)
+        {
+            return CheckImage("products", ProductId, ImageId);
+        }
+
         public byte[] GetProductImage(long ProductId, long ImageId)
         {
             RestRequest request = RequestForGet("images/products/" + ProductId, ImageId, "");
@@ -336,6 +485,19 @@ namespace Bukimedia.PrestaSharp.Factories
         public Task DeleteProductImageAsync(long ProductId, long ImageId)
         {
             return DeleteImageAsync("products", ProductId, ImageId);
+        }
+
+        /// <summary>
+        /// If Image ID is null checks if product have any images
+        /// else checks if the specific product image exists
+        /// and return true or false
+        /// </summary>
+        /// <param name="ProductId"></param>
+        /// <param name="ImageId"></param>
+        /// <returns></returns>
+        public async Task<bool> CheckIfExistsProductImageAsync(long ProductId, long ImageId)
+        {
+            return await CheckImageAsync("products", ProductId, ImageId);
         }
 
         public Task<byte[]> GetProductImageAsync(long ProductId, long ImageId)
@@ -383,6 +545,16 @@ namespace Bukimedia.PrestaSharp.Factories
             DeleteImage("categories", CategoryID, null);
         }
 
+        /// <summary>
+        /// Checks if the category have image and return true or false
+        /// </summary>
+        /// <param name="CategoryID"></param>
+        /// <returns></returns>
+        public bool CheckIfExistsCategoryImage(long CategoryID)
+        {
+            return CheckImage("categories", CategoryID, null);
+        }
+
         public byte[] GetCategoryImage(long CategoryId, long ImageId)
         {
             RestRequest request = RequestForGet("images/categories/" + CategoryId, ImageId, "");
@@ -428,6 +600,16 @@ namespace Bukimedia.PrestaSharp.Factories
         public Task DeleteCategoryImageAsync(long CategoryID)
         {
             return DeleteImageAsync("categories", CategoryID, null);
+        }
+
+        /// <summary>
+        ///  Checks if the category have image and return true or false
+        /// </summary>
+        /// <param name="CategoryID"></param>
+        /// <returns></returns>
+        public async Task<bool> CheckIfExistsCategoryImageAsync(long CategoryID)
+        {
+            return await CheckImageAsync("categories", CategoryID, null);
         }
 
         public Task<byte[]> GetCategoryImageAsync(long CategoryId, long ImageId)
