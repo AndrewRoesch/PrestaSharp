@@ -31,7 +31,16 @@ namespace Bukimedia.PrestaSharp.Factories
             request.AddParameter("sendemail", 1);
             order_history aux = this.Execute<order_history>(request);
             Entity.id = idAux;
-            return this.Get((long)aux.id);
+            if (aux == null)
+            {
+                return null;
+
+            }
+            else
+            {
+
+                return this.Get((long)aux.id);
+            }
         }
     } 
 }
