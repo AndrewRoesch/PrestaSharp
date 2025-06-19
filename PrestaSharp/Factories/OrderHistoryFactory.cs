@@ -27,8 +27,8 @@ namespace Bukimedia.PrestaSharp.Factories
             List<PrestaSharp.Entities.PrestaShopEntity> Entities = new
             List<PrestaSharp.Entities.PrestaShopEntity>();
             Entities.Add(Entity);
-            RestRequest request = this.RequestForAdd($"{pluralEntityName}&sendemail=1", Entities);
-            request.AddParameter("sendemail", 1);
+            RestRequest request = this.RequestForAdd($"{pluralEntityName}", Entities);
+            request.AddQueryParameter("sendemail", 1);
             order_history aux = this.Execute<order_history>(request);
             Entity.id = idAux;
             if (aux == null)
